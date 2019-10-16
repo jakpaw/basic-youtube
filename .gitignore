@@ -21,4 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # youtube api key
-api.key
+src/api-key.ts

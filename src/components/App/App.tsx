@@ -1,26 +1,40 @@
 import React from 'react';
+import SearchBar from '../SearchBar/SearchBar';
+import SearchResults from '../SearchResults/SearchResults';
 import './App.scss';
-import logo from './logo.svg';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-};
+interface AppState {
+  searchQuery?: string;
+  selectedVideo?: string;
+}
+
+class App extends React.Component<{}, AppState> {
+
+  constructor(props: {}) {
+    super(props);
+    this.state = {};
+  }
+
+  updateSearchQuery = (query: string) => {
+    this.setState({
+      searchQuery: query,
+    });
+  }
+
+  updateSelectedVideo = (selectedVideo: string) => {
+    this.setState({
+      selectedVideo,
+    });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <SearchBar onSearchSubmit={this.updateSearchQuery} />
+        <SearchResults searchQuery={this.state.searchQuery} onVideoSelect={this.updateSelectedVideo} />
+      </div>
+    );
+  }
+}
 
 export default App;
