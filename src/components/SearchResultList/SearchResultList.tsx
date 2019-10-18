@@ -1,25 +1,26 @@
 import React from 'react';
-import './SearchResults.scss';
+import './SearchResultList.scss';
 
 import { API_KEY } from '../../api-key';
+import SearchResult from '../SearchResult/SearchResult';
 
-interface SearchResultsProps {
+interface SearchResultListProps {
   searchQuery?: string;
   onVideoSelect(id: string): void;
 }
 
-interface SearchResultsState {
-  items: any[];
+interface SearchResultListState {
+  videos: any[]; // TODO
 }
 
-class SearchResults extends React.Component<SearchResultsProps, SearchResultsState> {
+class SearchResultList extends React.Component<SearchResultListProps, SearchResultListState> {
 
-  constructor(props: SearchResultsProps) {
+  constructor(props: SearchResultListProps) {
     super(props);
-    this.state = { items: [] };
+    this.state = { videos: [] };
   }
 
-  componentDidUpdate(prevProps: SearchResultsProps) {
+  componentDidUpdate(prevProps: SearchResultListProps) {
     if (this.props.searchQuery !== prevProps.searchQuery && this.props.searchQuery) {
       this.fetchData(this.props.searchQuery);
     }
@@ -32,7 +33,7 @@ class SearchResults extends React.Component<SearchResultsProps, SearchResultsSta
       .then(
         (result) => {
           this.setState({
-            items: result.items,
+            videos: result.items,
           });
         },
       );
@@ -43,8 +44,8 @@ class SearchResults extends React.Component<SearchResultsProps, SearchResultsSta
   }
 
   render() {
-    const listItems = this.state.items.map((item) =>
-      <div key={item.id.videoId} onClick={() => this.selectVideo(item.id.videoId)}>{item.snippet.title}</div>,
+    const listItems = this.state.videos.map((video) =>
+      <SearchResult key={video.id.videoId} videoData={video} onVideoSelected={this.selectVideo} />,
     );
     return (
       <div>
@@ -54,4 +55,4 @@ class SearchResults extends React.Component<SearchResultsProps, SearchResultsSta
   }
 }
 
-export default SearchResults;
+export default SearchResultList;

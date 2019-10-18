@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SearchResults from './SearchResults';
+import SearchResultList from './SearchResultList';
 
 it('renders without crashing', () => {
 /*   const div = document.createElement('div');
