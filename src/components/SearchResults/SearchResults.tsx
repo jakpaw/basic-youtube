@@ -38,9 +38,13 @@ class SearchResults extends React.Component<SearchResultsProps, SearchResultsSta
       );
   }
 
+  selectVideo = (videoId: string) => {
+    this.props.onVideoSelect(videoId);
+  }
+
   render() {
     const listItems = this.state.items.map((item) =>
-      <div key={item.id.videoId}>{item.snippet.title}</div>,
+      <div key={item.id.videoId} onClick={() => this.selectVideo(item.id.videoId)}>{item.snippet.title}</div>,
     );
     return (
       <div>

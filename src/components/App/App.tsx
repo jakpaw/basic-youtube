@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
+import Video from '../Video/Video';
 import './App.scss';
 
 interface AppState {
@@ -32,6 +33,7 @@ class App extends React.Component<{}, AppState> {
       <div className="App">
         <SearchBar onSearchSubmit={this.updateSearchQuery} />
         <SearchResults searchQuery={this.state.searchQuery} onVideoSelect={this.updateSelectedVideo} />
+        <Video videoId={this.state.selectedVideo} />
       </div>
     );
   }
