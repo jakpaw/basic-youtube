@@ -6,6 +6,7 @@ interface VideoProps {
 }
 
 const Video: React.FC<VideoProps> = (props) => {
+  // TODO maybe extract this if to a separate component
   if (props.videoId) {
     return (
       <iframe

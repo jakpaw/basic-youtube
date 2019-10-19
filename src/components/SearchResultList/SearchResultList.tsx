@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import SearchResult from 'components/SearchResult/SearchResult';
+import { fetchSearchResults } from 'features/search/searchSlice';
+import React, { useEffect } from 'react';
+import { useTypedDispatch, useTypedSelector } from 'store';
 import './SearchResultList.scss';
-
-import { API_KEY } from 'api-key';
-import SearchResult from '../SearchResult/SearchResult';
 
 interface SearchResultListProps {
   searchQuery?: string;
@@ -11,19 +11,19 @@ interface SearchResultListProps {
 
 export const SearchResultList: React.FC<SearchResultListProps> = (props) => {
 
-  const [results, setResults] = useState<any[]>([]);
+  const { searchQuery } = props;
+
+  const dispatch = useTypedDispatch();
+
+  const { results } = useTypedSelector(
+    (state) => state.search,
+  );
 
   useEffect(() => {
-    if (props.searchQuery) {
-      fetchData(props.searchQuery);
+    if (searchQuery) {
+      dispatch(fetchSearchResults(searchQuery));
     }
-  }, [props.searchQuery]);
-
-  const fetchData = (query: string) => {
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&key=${API_KEY}`)
-      .then((res) => res.json())
-      .then((result) => setResults(result.items));
-  };
+  }, [searchQuery, dispatch]);
 
   const listItems = results.map((result) =>
     <SearchResult key={result.id.videoId} videoData={result} onVideoSelected={props.onVideoSelect} />,
