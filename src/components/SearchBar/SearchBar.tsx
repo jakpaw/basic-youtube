@@ -1,45 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SearchBar.scss';
 
 interface SearchBarProps {
   onSearchSubmit(query: string): void;
 }
 
-interface SearchBarState {
-  value: string;
-  items: any[];
-  error: string;
-}
+const SearchBar: React.FC<SearchBarProps> = (props) => {
 
-class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
+  const [value, setValue] = useState<string>('');
 
-  constructor(props: SearchBarProps) {
-    super(props);
-    this.state = { value: '', items: [], error: '' };
-  }
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
 
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: event.target.value });
-  }
-
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    this.props.onSearchSubmit(this.state.value);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  }
+    props.onSearchSubmit(value);
+  };
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={value} onChange={handleChange} />
+        </label>
+        <button>Search</button>
+      </form>
+    </div>
+  );
+};
 
 export default SearchBar;

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchResultList.scss';
 
-import { API_KEY } from '../../api-key';
+import { API_KEY } from 'api-key';
 import SearchResult from '../SearchResult/SearchResult';
 
 interface SearchResultListProps {
@@ -9,50 +9,30 @@ interface SearchResultListProps {
   onVideoSelect(id: string): void;
 }
 
-interface SearchResultListState {
-  videos: any[]; // TODO
-}
+export const SearchResultList: React.FC<SearchResultListProps> = (props) => {
 
-class SearchResultList extends React.Component<SearchResultListProps, SearchResultListState> {
+  const [results, setResults] = useState<any[]>([]);
 
-  constructor(props: SearchResultListProps) {
-    super(props);
-    this.state = { videos: [] };
-  }
-
-  componentDidUpdate(prevProps: SearchResultListProps) {
-    if (this.props.searchQuery !== prevProps.searchQuery && this.props.searchQuery) {
-      this.fetchData(this.props.searchQuery);
+  useEffect(() => {
+    if (props.searchQuery) {
+      fetchData(props.searchQuery);
     }
-  }
+  }, [props.searchQuery]);
 
-  fetchData = (query: string) => {
-    fetch('https://www.googleapis.com/youtube/v3/search'
-    + `?part=snippet&q=${query}&type=video&key=${API_KEY}`)
+  const fetchData = (query: string) => {
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&key=${API_KEY}`)
       .then((res) => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            videos: result.items,
-          });
-        },
-      );
-  }
+      .then((result) => setResults(result.items));
+  };
 
-  selectVideo = (videoId: string) => {
-    this.props.onVideoSelect(videoId);
-  }
-
-  render() {
-    const listItems = this.state.videos.map((video) =>
-      <SearchResult key={video.id.videoId} videoData={video} onVideoSelected={this.selectVideo} />,
-    );
-    return (
-      <div>
-        {listItems}
-      </div>
-    );
-  }
-}
+  const listItems = results.map((result) =>
+    <SearchResult key={result.id.videoId} videoData={result} onVideoSelected={props.onVideoSelect} />,
+  );
+  return (
+    <div>
+      {listItems}
+    </div>
+  );
+};
 
 export default SearchResultList;
