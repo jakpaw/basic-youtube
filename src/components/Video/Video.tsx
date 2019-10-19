@@ -7,13 +7,18 @@ interface VideoProps {
 }
 
 const Video: React.FC<VideoProps> = (props) => {
+  const { videoProperties } = props;
   // TODO maybe extract this if to a separate component
-  if (props.videoProperties) {
+  if (videoProperties) {
     return (
-      <iframe
-        title="Video"
-        src={`https://www.youtube.com/embed/${props.videoProperties.id.videoId}?autoplay=1`}
-      />
+      <div>
+        <iframe
+          title="Video"
+          src={`https://www.youtube.com/embed/${videoProperties.id.videoId}?autoplay=1`}
+        />
+        <div>{videoProperties.snippet.title}</div>
+        <div>{videoProperties.snippet.description}</div>
+      </div>
     );
   } else {
     return <div>Please select a video from search results</div>;
