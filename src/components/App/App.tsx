@@ -9,6 +9,7 @@ import {
 } from 'features/selectVideo/selectVideoSlice';
 import React from 'react';
 import { useTypedDispatch, useTypedSelector } from 'store';
+import { VideoProperties } from 'youtube-api';
 import './App.scss';
 
 export const App: React.FC = () => {
@@ -20,16 +21,16 @@ export const App: React.FC = () => {
   );
   const searchSubmit = (query: string) => dispatch(submitSearchQuery({ query }));
 
-  const { selectedVideoId } = useTypedSelector(
+  const { selectedVideo } = useTypedSelector(
     (state) => state.selectVideo,
   );
-  const videoSelect = (videoId: string) => dispatch(selectVideo({ videoId }));
+  const videoSelect = (videoProperties: VideoProperties) => dispatch(selectVideo({ videoProperties }));
 
   return (
     <div className="App">
       <SearchBar onSearchSubmit={searchSubmit} />
       <SearchResultList searchQuery={submittedQuery} onVideoSelect={videoSelect} />
-      <Video videoId={selectedVideoId} />
+      <Video videoProperties={selectedVideo} />
     </div>
   );
 };

@@ -6,6 +6,7 @@ export interface VideoProperties {
   };
   snippet: {
     title: string;
+    description: string;
   };
 }
 

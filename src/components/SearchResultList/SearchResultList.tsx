@@ -2,11 +2,12 @@ import SearchResult from 'components/SearchResult/SearchResult';
 import { fetchSearchResults } from 'features/search/searchSlice';
 import React, { useEffect } from 'react';
 import { useTypedDispatch, useTypedSelector } from 'store';
+import { VideoProperties } from 'youtube-api';
 import './SearchResultList.scss';
 
 interface SearchResultListProps {
   searchQuery?: string;
-  onVideoSelect(id: string): void;
+  onVideoSelect(video: VideoProperties): void;
 }
 
 export const SearchResultList: React.FC<SearchResultListProps> = (props) => {
