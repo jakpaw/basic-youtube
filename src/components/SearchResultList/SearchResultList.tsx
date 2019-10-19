@@ -42,7 +42,7 @@ export const SearchResultList: React.FC<SearchResultListProps> = (props) => {
       case 'loading':
         return <div>Loading search results...</div>;
       case 'error':
-        return <div>An error occured while loading search results...</div>;
+        return <div>An error occured while loading search results</div>;
       default:
         return <div>Please type your search query in the box above</div>;
     }
