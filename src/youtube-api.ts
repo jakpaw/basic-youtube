@@ -7,6 +7,11 @@ export interface VideoProperties {
   snippet: {
     title: string;
     description: string;
+    thumbnails: {
+      high: {
+        url: string;
+      },
+    }
   };
 }
 

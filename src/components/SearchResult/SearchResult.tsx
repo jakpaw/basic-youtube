@@ -12,7 +12,12 @@ const SearchResult: React.FC<SearchResultProps> = (props) => {
 
   const selectVideo = () => props.onVideoSelected(videoData);
 
-  return <button onClick={selectVideo}>{videoData.snippet.title}</button>;
+  return (
+    <button onClick={selectVideo} className="SearchResult">
+      <img alt={'Video thumbnail'} src={videoData.snippet.thumbnails.high.url}/>
+      {videoData.snippet.title}
+    </button>
+  );
 };
 
 export default SearchResult;
