@@ -1,33 +1,16 @@
 import SearchResult from 'components/SearchResult/SearchResult';
-import { fetchSearchResults } from 'features/search/searchSlice';
-import React, { useEffect } from 'react';
-import { useTypedDispatch, useTypedSelector } from 'store';
-import { VideoProperties } from 'youtube-api';
+import React from 'react';
+import { useTypedSelector } from 'store';
 import './SearchResultList.scss';
 
-interface SearchResultListProps {
-  searchQuery?: string;
-  onVideoSelect(video: VideoProperties): void;
-}
-
-export const SearchResultList: React.FC<SearchResultListProps> = (props) => {
-
-  const { searchQuery } = props;
-
-  const dispatch = useTypedDispatch();
+export const SearchResultList: React.FC = () => {
 
   const { results, status } = useTypedSelector(
     (state) => state.search,
   );
 
-  useEffect(() => {
-    if (searchQuery) {
-      dispatch(fetchSearchResults(searchQuery));
-    }
-  }, [searchQuery, dispatch]);
-
   const listItems = results.map((result) =>
-    <SearchResult key={result.id.videoId} videoData={result} onVideoSelected={props.onVideoSelect} />,
+    <SearchResult key={result.id.videoId} videoProperties={result} />,
   );
   if (listItems.length > 0) {
     return (

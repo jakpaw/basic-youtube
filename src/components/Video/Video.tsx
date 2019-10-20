@@ -1,23 +1,21 @@
 import React from 'react';
-import { VideoProperties } from 'youtube-api';
+import { useTypedSelector } from 'store';
 import './Video.scss';
 
-interface VideoProps {
-  videoProperties?: VideoProperties;
-}
+const Video: React.FC = () => {
+  const { selectedVideo } = useTypedSelector(
+    (state) => state.selectVideo,
+  );
 
-const Video: React.FC<VideoProps> = (props) => {
-  const { videoProperties } = props;
-  // TODO maybe extract this if to a separate component
-  if (videoProperties) {
+  if (selectedVideo) {
     return (
       <div>
         <iframe
           title="Video"
-          src={`https://www.youtube.com/embed/${videoProperties.id.videoId}?autoplay=1`}
+          src={`https://www.youtube.com/embed/${selectedVideo.id.videoId}?autoplay=1`}
         />
-        <div>{videoProperties.snippet.title}</div>
-        <div>{videoProperties.snippet.description}</div>
+        <div>{selectedVideo.snippet.title}</div>
+        <div>{selectedVideo.snippet.description}</div>
       </div>
     );
   } else {

@@ -1,21 +1,25 @@
+import { selectVideo } from 'features/selectVideo/selectVideoSlice';
 import React from 'react';
+import { useTypedDispatch } from 'store';
 import { VideoProperties } from 'youtube-api';
 import './SearchResult.scss';
 
 interface SearchResultProps {
-  videoData: VideoProperties;
-  onVideoSelected(video: VideoProperties): void;
+  videoProperties: VideoProperties;
 }
 
 const SearchResult: React.FC<SearchResultProps> = (props) => {
-  const { videoData } = props;
 
-  const selectVideo = () => props.onVideoSelected(videoData);
+  const dispatch = useTypedDispatch();
+
+  const { videoProperties } = props;
+
+  const handleClick = () => dispatch(selectVideo({ videoProperties }));
 
   return (
-    <button onClick={selectVideo} className="SearchResult">
-      <img alt={'Video thumbnail'} src={videoData.snippet.thumbnails.high.url}/>
-      {videoData.snippet.title}
+    <button onClick={handleClick} className="SearchResult">
+      <img alt={'Video thumbnail'} src={videoProperties.snippet.thumbnails.high.url}/>
+      {videoProperties.snippet.title}
     </button>
   );
 };

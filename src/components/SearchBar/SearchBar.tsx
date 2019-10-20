@@ -1,11 +1,11 @@
+import { submitSearchQuery } from 'features/search/searchSlice';
 import React, { useState } from 'react';
+import { useTypedDispatch } from 'store';
 import './SearchBar.scss';
 
-interface SearchBarProps {
-  onSearchSubmit(query: string): void;
-}
+const SearchBar: React.FC = () => {
 
-const SearchBar: React.FC<SearchBarProps> = (props) => {
+  const dispatch = useTypedDispatch();
 
   const [value, setValue] = useState<string>('');
 
@@ -15,7 +15,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.onSearchSubmit(value);
+    dispatch(submitSearchQuery(value));
   };
 
   return (
