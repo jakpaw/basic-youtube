@@ -21,7 +21,7 @@ export const SearchResultList: React.FC = () => {
   } else {
     switch (status) {
       case 'ready':
-        return <div>No videos found, try another query</div>;
+        return <div>No videos found, please try another query</div>;
       case 'loading':
         return <div>Loading search results...</div>;
       case 'error':

@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from 'redux-starter-kit';
 import { Action } from 'redux-starter-kit';
-import { ThunkAction } from 'redux-thunk';
+import { ThunkAction as GenericThunkAction } from 'redux-thunk';
 import { RootState } from 'store';
 import { searchVideos, VideoProperties } from 'youtube-api';
 
-export type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
+type ThunkAction = GenericThunkAction<void, RootState, null, Action<string>>;
 
 interface SearchState {
   submittedQuery: string;
@@ -32,14 +32,15 @@ const searchSlice = createSlice({
   reducers: {
     fetchSearchResultsStart: (state, action: PayloadAction<SubmitSearchQueryPayload>) => {
       state.submittedQuery = action.payload.query;
-      state.status = 'loading';
       state.results = [];
+      state.status = 'loading';
     },
     fetchSearchResultsSuccess: (state, action: PayloadAction<FetchSearchResultsSuccessPayload>) => {
       state.results = action.payload.results;
       state.status = 'ready';
     },
     fetchSearchResultsError: (state) => {
+      state.results = [];
       state.status = 'error';
     },
   },
@@ -53,7 +54,7 @@ export const {
 
 export default searchSlice.reducer;
 
-export const submitSearchQuery = (searchQuery: string): AppThunk => async (dispatch) => {
+export const submitSearchQuery = (searchQuery: string): ThunkAction => async (dispatch) => {
   try {
     dispatch(fetchSearchResultsStart({ query: searchQuery }));
     const results = await searchVideos(searchQuery);

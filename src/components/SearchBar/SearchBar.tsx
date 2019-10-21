@@ -22,8 +22,8 @@ const SearchBar: React.FC = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          Name:
-          <input type="text" value={value} onChange={handleChange} />
+          Search videos
+          <input type="text" value={value} onChange={handleChange} required={true} />
         </label>
         <button>Search</button>
       </form>

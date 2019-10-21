@@ -11,7 +11,7 @@ const Video: React.FC = () => {
     return (
       <div>
         <iframe
-          title="Video"
+          title="{selectedVideo.snippet.title}"
           src={`https://www.youtube.com/embed/${selectedVideo.id.videoId}?autoplay=1`}
         />
         <div>{selectedVideo.snippet.title}</div>
