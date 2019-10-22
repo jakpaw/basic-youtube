@@ -34,6 +34,7 @@ export const SearchResultList: React.FC = () => {
   };
 
   return (
+    // headers hierarchy needs to be rethought
     <section className="SearchResultList">
       <h2>Search results</h2>
       {getContent()}
