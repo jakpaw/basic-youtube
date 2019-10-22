@@ -19,6 +19,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# youtube api key
-src/api-key.ts

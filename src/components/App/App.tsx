@@ -6,7 +6,8 @@ import './App.scss';
 
 export const App: React.FC = () => {
   return (
-    // Youtube-like loader on top would be nice
+    // YouTube-like loader on top would be nice
+    // Should be a simple rectangle with scale or translate animation
     <div className="App">
       <SearchBar />
       <SearchResultList />

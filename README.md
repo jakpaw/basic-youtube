@@ -6,6 +6,8 @@ In the project directory, you can run:
 
 ### `npm start`
 
+#### Before running the app, you have to set REACT_APP_API_KEY environment variable with YouTube API key.
+
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
