@@ -7,20 +7,24 @@ const Video: React.FC = () => {
     (state) => state.selectVideo,
   );
 
-  if (selectedVideo) {
-    return (
-      <div>
+  const content = selectedVideo
+    ? (
+      <React.Fragment>
         <iframe
           title="{selectedVideo.snippet.title}"
           src={`https://www.youtube.com/embed/${selectedVideo.id.videoId}?autoplay=1`}
         />
-        <div>{selectedVideo.snippet.title}</div>
-        <div>{selectedVideo.snippet.description}</div>
-      </div>
-    );
-  } else {
-    return <div>Please select a video from search results</div>;
-  }
+        <h1>{selectedVideo.snippet.title}</h1>
+        <p>{selectedVideo.snippet.description}</p>
+      </React.Fragment>
+    )
+    : <div>Please select a video from search results</div>;
+
+  return (
+    <section className="Video">
+      {content}
+    </section>
+  );
 
 };
 

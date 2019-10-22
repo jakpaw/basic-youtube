@@ -1,0 +1,57 @@
+@import 'variables';
+
+$result-width: 200px;
+
+.SearchResultList {
+  display: flex;
+  flex-direction: column;
+
+
+  h2 {
+    margin: 0;
+    padding: $spacing-unit;
+
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  .result-list,
+  .message {
+    padding: 0 $spacing-unit $spacing-unit $spacing-unit;
+    width: $result-width + 2 * $spacing-unit;
+  }
+
+  .result-list {
+    flex: 1;
+    overflow: auto;
+  }
+
+  .SearchResult {
+    width: 100%
+  }
+
+  .SearchResult + .SearchResult {
+    margin-top: $spacing-unit;
+  }
+
+  @media (orientation: portrait) {
+    .result-list,
+    .message {
+      width: 100%;
+    }
+
+    .result-list {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .SearchResult + .SearchResult {
+      flex: 0 0 $result-width;
+
+      margin-top: 0;
+      margin-left: $spacing-unit;
+    }
+  }
+
+
+}

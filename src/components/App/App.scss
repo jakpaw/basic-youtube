@@ -1,0 +1,31 @@
+.App {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template:
+    "head head" 56px
+    "main list" calc(100% - 56px) /
+    1fr   auto;
+
+  @media (orientation: portrait) {
+    grid-template:
+    "head" 56px
+    "list" auto
+    "main" 1fr /
+    100%;
+  }
+
+  background-color: rgb(249, 249, 249);
+
+  .SearchBar {
+    grid-area: head;
+  }
+
+  .Video {
+    grid-area: main;
+  }
+
+  .SearchResultList {
+    grid-area: list;
+  }
+}

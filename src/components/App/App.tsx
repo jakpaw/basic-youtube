@@ -6,6 +6,7 @@ import './App.scss';
 
 export const App: React.FC = () => {
   return (
+    // Youtube-like loader on top would be nice
     <div className="App">
       <SearchBar />
       <SearchResultList />

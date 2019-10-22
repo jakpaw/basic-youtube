@@ -1,5 +1,29 @@
-iframe {
-  border: none;
-  width: 100%;
-  height: 300px;
+@import 'variables';
+
+.Video {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  padding: $spacing-unit 0 $spacing-unit $spacing-unit;
+
+  @media (orientation: portrait) {
+    padding: 0 $spacing-unit $spacing-unit $spacing-unit;
+  }
+
+  iframe {
+    border: none;
+    flex: 1;
+  }
+
+  h1 {
+    margin: 20px 0 10px;
+
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  p {
+    margin: 0;
+  }
 }

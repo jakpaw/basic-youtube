@@ -1,9 +1,7 @@
 import { shallow } from 'enzyme';
-import { selectVideo } from 'features/selectVideo/selectVideoSlice';
 import React from 'react';
 import { mockSearchResults } from 'testMocks';
-import { MockStore, setupMockStore } from 'testUtils';
-import { VideoProperties } from 'youtube-api';
+import { setupMockStore } from 'testUtils';
 import SearchResultList from './SearchResultList';
 
 test('SearchResultList show a message when there is no query submitted', () => {
@@ -11,7 +9,8 @@ test('SearchResultList show a message when there is no query submitted', () => {
 
   const searchResultList = shallow(<SearchResultList />);
   expect(searchResultList.find('SearchResult').length).toBe(0);
-  expect(searchResultList.text()).toBe('Please type your search query in the box above');
+  const message = searchResultList.find('.message');
+  expect(message.text()).toBe('Please type your search query in the box above');
 });
 
 test('SearchResultList show a message when results are loading', () => {
@@ -25,7 +24,8 @@ test('SearchResultList show a message when results are loading', () => {
 
   const searchResultList = shallow(<SearchResultList />);
   expect(searchResultList.find('SearchResult').length).toBe(0);
-  expect(searchResultList.text()).toBe('Loading search results...');
+  const message = searchResultList.find('.message');
+  expect(message.text()).toBe('Loading search results...');
 });
 
 test('SearchResultList shows list of results', () => {
@@ -59,7 +59,8 @@ test('SearchResultList show a message when result list is empty', () => {
 
   const searchResultList = shallow(<SearchResultList />);
   expect(searchResultList.find('SearchResult').length).toBe(0);
-  expect(searchResultList.text()).toBe('No videos found, please try another query');
+  const message = searchResultList.find('.message');
+  expect(message.text()).toBe('No videos found, please try another query');
 });
 
 test('SearchResultList show a message when there is an error', () => {
@@ -73,5 +74,6 @@ test('SearchResultList show a message when there is an error', () => {
 
   const searchResultList = shallow(<SearchResultList />);
   expect(searchResultList.find('SearchResult').length).toBe(0);
-  expect(searchResultList.text()).toBe('An error occured while loading search results');
+  const message = searchResultList.find('.message');
+  expect(message.text()).toBe('An error occured while loading search results');
 });

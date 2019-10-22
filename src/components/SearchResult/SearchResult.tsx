@@ -18,8 +18,8 @@ const SearchResult: React.FC<SearchResultProps> = (props) => {
 
   return (
     <button onClick={handleClick} className="SearchResult">
-      <img alt={'Video thumbnail'} src={videoProperties.snippet.thumbnails.high.url}/>
-      {videoProperties.snippet.title}
+      <img alt={'Video thumbnail'} src={videoProperties.snippet.thumbnails.medium.url}/>
+      <div className="title">{videoProperties.snippet.title}</div>
     </button>
   );
 };

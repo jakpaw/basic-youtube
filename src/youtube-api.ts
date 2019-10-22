@@ -9,7 +9,7 @@ export interface VideoProperties {
     title: string;
     description: string;
     thumbnails: {
-      high: {
+      medium: {
         url: string;
       },
     }

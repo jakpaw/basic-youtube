@@ -7,7 +7,7 @@ export const mockVideoProperties = {
     title: 'test title',
     description: 'test description',
     thumbnails: {
-      high: { url: 'testThumbnailUrl' },
+      medium: { url: 'testThumbnailUrl' },
     },
   },
 };
