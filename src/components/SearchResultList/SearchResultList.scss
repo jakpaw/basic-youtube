@@ -45,9 +45,11 @@ $result-width: 200px;
       align-items: flex-start;
     }
 
-    .SearchResult + .SearchResult {
+    .SearchResult {
       flex: 0 0 $result-width;
+    }
 
+    .SearchResult + .SearchResult {
       margin-top: 0;
       margin-left: $spacing-unit;
     }
