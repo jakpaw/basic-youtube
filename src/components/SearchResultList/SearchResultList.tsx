@@ -22,6 +22,7 @@ export const SearchResultList: React.FC = () => {
     } else {
       switch (status) {
         case 'ready':
+          // messages should be styled nicer
           return <div className="message">No videos found, please try another query</div>;
         case 'loading':
           return <div className="message">Loading search results...</div>;

@@ -17,6 +17,7 @@ const SearchResult: React.FC<SearchResultProps> = (props) => {
   const handleClick = () => dispatch(selectVideo({ videoProperties }));
 
   return (
+    // img should use srcSet
     <button onClick={handleClick} className="SearchResult">
       <img alt={'Video thumbnail'} src={videoProperties.snippet.thumbnails.medium.url}/>
       <div className="title">{videoProperties.snippet.title}</div>
